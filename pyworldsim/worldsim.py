@@ -168,11 +168,15 @@ class GameMap(GameComponent):
 
     @property
     def spaces(self):
-        s = ()
         for column in self._space_arrays:
             for space in column:
-                s += (space,)
-        return s
+                yield space
+
+    @property
+    def pops(self):
+        for space in self.spaces:
+            for pop in space.pops:
+                yield pop
 
     def add_space(self, new_space):
         self._space_arrays[new_space.x][new_space.y] = new_space
@@ -288,7 +292,7 @@ class Space(GameComponent):
         for a in adjacent_spaces:
             if a.is_empty:
                 weight += 1
-        if weight > random.randrange(50):
+        if weight > random.randrange(100):
             new_pop = self.gen_pop()
             reproduce_step.add_event(
                 ReproduceEvent(self, new_pop, from_random=True))
