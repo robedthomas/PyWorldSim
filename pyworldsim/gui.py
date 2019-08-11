@@ -141,7 +141,7 @@ class GuiSpace(GuiComponent):
         return self.get_pop_index(gui_pop) // self.get_pop_columns(surface)
 
     def get_pop_column(self, gui_pop, surface):
-        return self.get_pop_index(gui_pop) // self.get_pop_columns(surface)
+        return self.get_pop_index(gui_pop) % self.get_pop_columns(surface)
 
     def get_pop_rect(self, gui_pop, surface):
         pop_row = self.get_pop_row(gui_pop, surface)
